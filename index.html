@@ -14,7 +14,19 @@
 </head>
 
 <body>
-    <canvas id="canvas"> </canvas>
-    <button id="playButton">Play</button>
-    <button id="pauseButton">Pause</button>
+    <div id="canvasContainer" class="flexChind">
+        <canvas id="canvas"> </canvas>
+    </div>
+
+    <div id="controlsContainer"class="flexChild">
+        <div id="buttonsContainer">
+            <button id="playButton">Play</button>
+            <button id="pauseButton">Pause</button>
+        </div>
+    
+        <div class="sliderContainer">
+            Ball Size
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        </div>
+    </div>
 </body>

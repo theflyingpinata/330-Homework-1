@@ -1,3 +1,13 @@
 canvas {
     border: 1px solid black;
 }
+
+body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.flexChild {
+    margin: 5em;
+}
