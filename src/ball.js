@@ -19,7 +19,7 @@ class ball {
 
     clampVelocity() {
         let magnitude = Math.sqrt(this.velocity.x * this.velocity.x + this.velocity.y * this.velocity.y);
-        console.log("magni " + magnitude);
+        //console.log("magni " + magnitude);
         if (magnitude > this.maxSpeed) {
             this.velocity.normalize();
             this.velocity.scale(this.maxSpeed);
@@ -47,6 +47,17 @@ class ball {
         if(this.position.y < 0) {
             this.velocity.y = -this.velocity.y;
         }
+    }
+
+    // returns true if this is colliding with given ball
+    checkCollision(otherBall) {
+        let distance = Math.pow(this.position.x - otherBall.position.x, 2) + Math.pow(this.position.y - otherBall.position.y, 2);
+        let radiusDistance = Math.pow(this.radius + otherBall.radius, 2);
+        if(distance < radiusDistance) {
+            // Have a collision
+            return true;
+        }
+        return false;
     }
 }
 

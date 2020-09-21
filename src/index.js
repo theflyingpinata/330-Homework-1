@@ -17,6 +17,8 @@ let ball2SizeSlider;
 let alphaSlider;
 let alphaLabel;
 
+let velocityLabel;
+
 
 function init() {
     canvas = document.querySelector('canvas');
@@ -24,11 +26,13 @@ function init() {
     alphaLabel = document.querySelector("#alphaLabel");
     ball1SizeSlider = document.querySelector("#size1Slider");
     ball2SizeSlider = document.querySelector("#size2Slider");
+    velocityLabel = document.querySelector("#velocityLabel");
 
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
     ctx = canvas.getContext('2d');
 
+    // Pausing and playing
     document.querySelector("#playButton").onclick = function () {
         if (paused) {
             paused = false;
@@ -40,6 +44,8 @@ function init() {
         paused = true;
     };
 
+
+
     alphaSlider.oninput = updateLabel("#alphaLabel", "#alphaSlider");
 
     //ball1SizeSlider.oninput = updateLabel("#sizeLabel", "#sizeSlider");
@@ -49,7 +55,8 @@ function init() {
     ball1 = new ball(100, 100, 25, "red");
     ballMid = new ball(canvasWidth / 2, canvasHeight / 2, 50, "black");
 
-    ball1SizeSlider.addEventListener("input", updateBallSize(ball1));
+    ball1SizeSlider.addEventListener("input", function(e) { 
+        ball1.radius = e.target.value});
     ball2SizeSlider.addEventListener("input", updateBallSize(ballMid));
 
     kctLIB.drawBall(ctx, ballMid);
@@ -72,16 +79,31 @@ function loop() {
     ctx.restore();
     //cls(ctx);
 
-    ball1.seek(ballMid);
-    ballMid.seek(ball1);
+    
+    if(ballMid.checkCollision(ball1)) {
+        ballMid.velocity.x = -ballMid.velocity.x;
+        ballMid.velocity.y = -ballMid.velocity.y;
+        ball1.velocity.x = -ball1.velocity.x;
+        ball1.velocity.y = -ball1.velocity.y;
+    }
+    else {
+        ball1.seek(ballMid);
+        ballMid.seek(ball1);
+
+    }
+    
     ball1.update(ballMid);
     ballMid.update(ball1);
+    
     ball1.checkEdges(canvasWidth, canvasHeight);
     ballMid.checkEdges(canvasWidth, canvasHeight);
     //console.log(`Velocity: ${ball1.velocity.x}, ${ball1.velocity.y}`)
 
     kctLIB.drawBall(ctx, ballMid);
     kctLIB.drawBall(ctx, ball1);
+
+    velocityLabel.innerHTML = `ball1: ${ball1.velocity.x.toFixed(2)},${ball1.velocity.y.toFixed(2)}\nballMid: ${ballMid.velocity.x.toFixed(2)},${ballMid.velocity.y.toFixed(2)}\n`;
+    
 }
 
 function updateBallSize(ball) {
