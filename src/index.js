@@ -9,6 +9,8 @@ const canvasWidth = 600, canvasHeight = 400;
 let ball1;
 let ballMid;
 
+let particle;
+
 let paused;
 
 let ball1SizeSlider;
@@ -44,22 +46,24 @@ function init() {
         paused = true;
     };
 
-
-
-    alphaSlider.oninput = updateLabel("#alphaLabel", "#alphaSlider");
+    alphaSlider.oninput = wsbLIB.updateLabel("#alphaLabel", "#alphaSlider");
 
     //ball1SizeSlider.oninput = updateLabel("#sizeLabel", "#sizeSlider");
-    ball1SizeSlider.addEventListener("input", updateLabel("#size1Label", "#size1Slider"));
-    ball2SizeSlider.addEventListener("input", updateLabel("#size2Label", "#size2Slider"));
+    ball1SizeSlider.addEventListener("input", wsbLIB.updateLabel("#size1Label", "#size1Slider"));
+    ball2SizeSlider.addEventListener("input", wsbLIB.updateLabel("#size2Label", "#size2Slider"));
 
     ball1 = new ball(100, 100, 25, "red");
     ballMid = new ball(canvasWidth / 2, canvasHeight / 2, 50, "black");
 
-    ball1SizeSlider.addEventListener("input", updateBallSize(ball1, ballMid));
-    ball2SizeSlider.addEventListener("input", updateBallSize(ballMid, ball1));
+    particle = new singleParticle(ball1.position.x, ball1.position.y, 10, "blue", 5, 90);
+
+    ball1SizeSlider.addEventListener("input", wsbLIB.updateBallSize(ball1, ballMid));
+    ball2SizeSlider.addEventListener("input", wsbLIB.updateBallSize(ballMid, ball1));
 
     kctLIB.drawBall(ctx, ballMid);
     kctLIB.drawBall(ctx, ball1);
+
+    wsbLIB.drawParticle(ctx, particle);
 
     loop();
 }
@@ -78,7 +82,6 @@ function loop() {
     ctx.restore();
     //cls(ctx);
 
-    
     if(ballMid.checkCollision(ball1)) {
 
         ballMid.velocity.x = -ballMid.velocity.x;
@@ -104,24 +107,6 @@ function loop() {
 
     velocityLabel.innerHTML = `ball1: ${ball1.velocity.x.toFixed(2)},${ball1.velocity.y.toFixed(2)}\nballMid: ${ballMid.velocity.x.toFixed(2)},${ballMid.velocity.y.toFixed(2)}\n`;
     
-}
-
-function updateBallSize(ball, otherBall) {
-    return function (e) {
-        ball.radius = parseInt(e.target.value, 10);
-
-        if (ball.checkCollision(otherBall))
-        {
-            ball.position.x += ball.radius;
-            ball.position.y += ball.radius;
-        }
-    }
-}
-
-function updateLabel(labelName, controlName) {
-    return function () {
-        document.querySelector(labelName).innerHTML = document.querySelector(controlName).value;
-    }
 }
 
 function cls(ctx) {

@@ -43,6 +43,7 @@ console.log("loaded");
             }
             ctx.restore();
         },
+        
         drawBall(ctx, ball){
             kctLIB.drawCircle(ctx, ball.position.x, ball.position.y, ball.radius, ball.color);
         },
