@@ -55,10 +55,8 @@ function init() {
     ball1 = new ball(100, 100, 25, "red");
     ballMid = new ball(canvasWidth / 2, canvasHeight / 2, 50, "black");
 
-    ball1SizeSlider.addEventListener("input", function(e) {
-        ball1.radius = parseInt(e.target.value, 10);});
-    ball2SizeSlider.addEventListener("input", function(e) {
-        ballMid.radius = parseInt(e.target.value, 10);});
+    ball1SizeSlider.addEventListener("input", updateBallSize(ball1, ballMid));
+    ball2SizeSlider.addEventListener("input", updateBallSize(ballMid, ball1));
 
     kctLIB.drawBall(ctx, ballMid);
     kctLIB.drawBall(ctx, ball1);
@@ -82,6 +80,7 @@ function loop() {
 
     
     if(ballMid.checkCollision(ball1)) {
+
         ballMid.velocity.x = -ballMid.velocity.x;
         ballMid.velocity.y = -ballMid.velocity.y;
         ball1.velocity.x = -ball1.velocity.x;
@@ -107,9 +106,15 @@ function loop() {
     
 }
 
-function updateBallSize(ball) {
+function updateBallSize(ball, otherBall) {
     return function (e) {
-        ball.radius = e.target.value;
+        ball.radius = parseInt(e.target.value, 10);
+
+        if (ball.checkCollision(otherBall))
+        {
+            ball.position.x += ball.radius;
+            ball.position.y += ball.radius;
+        }
     }
 }
 
