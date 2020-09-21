@@ -7,6 +7,7 @@ class ball {
         this.acceleration = .1;
         this.maxSpeed = 4;
         this.velocity = new vector(0, 0);
+        this.state = "normal";
     }
 
     update() {
@@ -17,14 +18,14 @@ class ball {
         this.position = kctLIB.add2Vector(this.position, this.velocity);
     }
 
-    clampVelocity() {
-        let magnitude = Math.sqrt(this.velocity.x * this.velocity.x + this.velocity.y * this.velocity.y);
-        //console.log("magni " + magnitude);
-        if (magnitude > this.maxSpeed) {
-            this.velocity.normalize();
-            this.velocity.scale(this.maxSpeed);
+    /*
+    doAction(target) {
+        switch(state){
+
         }
     }
+    */
+    
 
     seek(target) {
         let seekVector = kctLIB.sub2Vector(target.position, this.position);//new vector(target.position.x - this.position.x, target.position.y - this.position.y);
@@ -49,9 +50,18 @@ class ball {
         }
     }
 
+    clampVelocity() {
+        let magnitude = Math.sqrt(this.velocity.x * this.velocity.x + this.velocity.y * this.velocity.y);
+        //console.log("magni " + magnitude);
+        if (magnitude > this.maxSpeed) {
+            this.velocity.normalize();
+            this.velocity.scale(this.maxSpeed);
+        }
+    }
+
     // returns true if this is colliding with given ball
     checkCollision(otherBall) {
-        let distance = Math.pow(this.position.x - otherBall.position.x, 2) + Math.pow(this.position.y - otherBall.position.y, 2);
+        let distance = Math.pow(otherBall.position.x - this.position.x, 2) + Math.pow(otherBall.position.y- this.position.y, 2);
         let radiusDistance = Math.pow(this.radius + otherBall.radius, 2);
         if(distance < radiusDistance) {
             // Have a collision

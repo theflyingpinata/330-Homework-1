@@ -55,9 +55,10 @@ function init() {
     ball1 = new ball(100, 100, 25, "red");
     ballMid = new ball(canvasWidth / 2, canvasHeight / 2, 50, "black");
 
-    ball1SizeSlider.addEventListener("input", function(e) { 
-        ball1.radius = e.target.value});
-    ball2SizeSlider.addEventListener("input", updateBallSize(ballMid));
+    ball1SizeSlider.addEventListener("input", function(e) {
+        ball1.radius = parseInt(e.target.value, 10);});
+    ball2SizeSlider.addEventListener("input", function(e) {
+        ballMid.radius = parseInt(e.target.value, 10);});
 
     kctLIB.drawBall(ctx, ballMid);
     kctLIB.drawBall(ctx, ball1);
