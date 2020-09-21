@@ -4,8 +4,8 @@ class ball {
         this.radius = radius;
         this.color = color;
 
-        this.acceleration = .1;
-        this.maxSpeed = 4;
+        this.acceleration = .3;
+        this.maxSpeed = 10;
         this.velocity = new vector(0, 0);
         this.state = "normal";
         this.stateTimer = 0;
@@ -26,8 +26,10 @@ class ball {
                 this.velocity.add(this.seek(target));
                 break;
             case "dash":
-                if(this.stateTimer >= 160){
-                    this.velocity.add(this.seek(target).scale(3));//= kctLIB.add2Vector(this.seek(target).scale(3), this.velocity);
+                if (this.stateTimer >= 160) {
+                    let seekVector = this.seek(target);
+                    seekVector.scale(3);
+                    this.velocity.add(seekVector);//= kctLIB.add2Vector(this.seek(target).scale(3), this.velocity);
                 }
                 break;
             case "guard":
@@ -35,8 +37,7 @@ class ball {
                     this.velocity.scale(.1);
                 }
                 else if (this.stateTimer >= 120) {
-                    this.state = "normal";
-                    this.stateTimer = 0;
+                    this.changeState("normal");
                 }
                 break;
             default:
@@ -63,16 +64,16 @@ class ball {
     }
 
     checkEdges(width, height) {
-        if (this.position.x > width) {
+        if (this.position.x + this.radius > width) {
             this.velocity.x = -this.velocity.x;
         }
-        if (this.position.x < 0) {
+        if (this.position.x - this.radius < 0) {
             this.velocity.x = -this.velocity.x;
         }
-        if (this.position.y > height) {
+        if (this.position.y + this.radius > height) {
             this.velocity.y = -this.velocity.y;
         }
-        if (this.position.y < 0) {
+        if (this.position.y - this.radius < 0) {
             this.velocity.y = -this.velocity.y;
         }
     }
