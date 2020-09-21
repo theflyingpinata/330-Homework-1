@@ -55,8 +55,12 @@ function init() {
     ball1 = new ball(100, 100, 25, "red");
     ballMid = new ball(canvasWidth / 2, canvasHeight / 2, 50, "black");
 
-    ball1SizeSlider.addEventListener("input", updateBallSize(ball1, ballMid));
-    ball2SizeSlider.addEventListener("input", updateBallSize(ballMid, ball1));
+    ball1SizeSlider.addEventListener("input", function (e) {
+        ball1.radius = parseInt(e.target.value, 10);
+    });
+    ball2SizeSlider.addEventListener("input", function (e) {
+        ballMid.radius = parseInt(e.target.value, 10);
+    });
 
     kctLIB.drawBall(ctx, ballMid);
     kctLIB.drawBall(ctx, ball1);
@@ -78,23 +82,47 @@ function loop() {
     ctx.restore();
     //cls(ctx);
 
-    
-    if(ballMid.checkCollision(ball1)) {
 
+    if (ballMid.checkCollision(ball1)) {
         ballMid.velocity.x = -ballMid.velocity.x;
         ballMid.velocity.y = -ballMid.velocity.y;
         ball1.velocity.x = -ball1.velocity.x;
         ball1.velocity.y = -ball1.velocity.y;
+    
+
+        switch (kctLIB.getRandomInt(0, 3)) {
+            case 0:
+                ball1.changeState("seek");
+                break;
+            case 1:
+                ball1.changeState("dash");
+                break;
+            case 2:
+                ball1.changeState("guard");
+                break;
+        }
+        switch (kctLIB.getRandomInt(0, 3)) {
+            case 0:
+                ballMid.changeState("seek");
+                break;
+            case 1:
+                ballMid.changeState("dash");
+                break;
+            case 2:
+                ballMid.changeState("guard");
+                break;
+        }
     }
     else {
-        ball1.seek(ballMid);
-        ballMid.seek(ball1);
+
+        ball1.doAction(ballMid);
+        ballMid.doAction(ball1);
 
     }
-    
+
     ball1.update(ballMid);
     ballMid.update(ball1);
-    
+
     ball1.checkEdges(canvasWidth, canvasHeight);
     ballMid.checkEdges(canvasWidth, canvasHeight);
     //console.log(`Velocity: ${ball1.velocity.x}, ${ball1.velocity.y}`)
@@ -103,7 +131,7 @@ function loop() {
     kctLIB.drawBall(ctx, ball1);
 
     velocityLabel.innerHTML = `ball1: ${ball1.velocity.x.toFixed(2)},${ball1.velocity.y.toFixed(2)}\nballMid: ${ballMid.velocity.x.toFixed(2)},${ballMid.velocity.y.toFixed(2)}\n`;
-    
+
 }
 
 function updateBallSize(ball, otherBall) {
