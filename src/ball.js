@@ -4,10 +4,11 @@ class ball {
         this.radius = radius;
         this.color = color;
 
-        this.acceleration = .1;
-        this.maxSpeed = 4;
+        this.acceleration = .3;
+        this.maxSpeed = 10;
         this.velocity = new vector(0, 0);
         this.state = "normal";
+        this.stateTimer = 0;
     }
 
     update() {
@@ -15,37 +16,64 @@ class ball {
         // seekVector.scale(this.acceleration);
         // this.velocity = kctLIB.add2Vector(seekVector, this.velocity); //kctLIB.add2Vector(, this.acceleration);
         this.clampVelocity();
-        this.position = kctLIB.add2Vector(this.position, this.velocity);
+        this.position.add(this.velocity);// = kctLIB.add2Vector(this.position, this.velocity);
     }
 
-    /*
+
     doAction(target) {
-        switch(state){
+        switch (this.state) {
+            case "normal":
+                this.velocity.add(this.seek(target));
+                break;
+            case "dash":
+                if (this.stateTimer >= 160) {
+                    let seekVector = this.seek(target);
+                    seekVector.scale(3);
+                    this.velocity.add(seekVector);//= kctLIB.add2Vector(this.seek(target).scale(3), this.velocity);
+                }
+                break;
+            case "guard":
+                if (this.stateTimer == 45) {
+                    this.velocity.scale(.1);
+                }
+                else if (this.stateTimer >= 120) {
+                    this.changeState("normal");
+                }
+                break;
+            default:
+                this.velocity.add(this.seek(target));
+                break;
 
         }
+        this.stateTimer += 1;
     }
-    */
-    
+
+    changeState(newState) {
+        this.stateTimer = 0;
+        this.state = newState;
+    }
+
 
     seek(target) {
         let seekVector = kctLIB.sub2Vector(target.position, this.position);//new vector(target.position.x - this.position.x, target.position.y - this.position.y);
         seekVector.normalize();
         //seekVector.print();
         seekVector.scale(this.acceleration);
-        this.velocity = kctLIB.add2Vector(seekVector, this.velocity);
+        return seekVector;
+        //this.velocity = kctLIB.add2Vector(seekVector, this.velocity);
     }
 
     checkEdges(width, height) {
-        if(this.position.x > width) {
+        if (this.position.x + this.radius > width) {
             this.velocity.x = -this.velocity.x;
         }
-        if(this.position.x < 0) {
+        if (this.position.x - this.radius < 0) {
             this.velocity.x = -this.velocity.x;
         }
-        if(this.position.y > height) {
+        if (this.position.y + this.radius > height) {
             this.velocity.y = -this.velocity.y;
         }
-        if(this.position.y < 0) {
+        if (this.position.y - this.radius < 0) {
             this.velocity.y = -this.velocity.y;
         }
     }
@@ -61,9 +89,9 @@ class ball {
 
     // returns true if this is colliding with given ball
     checkCollision(otherBall) {
-        let distance = Math.pow(otherBall.position.x - this.position.x, 2) + Math.pow(otherBall.position.y- this.position.y, 2);
+        let distance = Math.pow(otherBall.position.x - this.position.x, 2) + Math.pow(otherBall.position.y - this.position.y, 2);
         let radiusDistance = Math.pow(this.radius + otherBall.radius, 2);
-        if(distance < radiusDistance) {
+        if (distance < radiusDistance) {
             // Have a collision
             return true;
         }
@@ -86,6 +114,11 @@ class vector {
     scale(factor) {
         this.x *= factor;
         this.y *= factor;
+    }
+
+    add(otherVector) {
+        this.x += otherVector.x;
+        this.y += otherVector.y;
     }
 
     print() {
