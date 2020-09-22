@@ -24,13 +24,18 @@ class ball {
         switch (this.state) {
             case "normal":
                 this.velocity.add(this.seek(target));
+
+                this.color = "red";
+
                 break;
             case "dash":
                 if (this.stateTimer >= 160) {
                     let seekVector = this.seek(target);
-                    seekVector.scale(3);
+                    seekVector.scale(10);
                     this.velocity.add(seekVector);//= kctLIB.add2Vector(this.seek(target).scale(3), this.velocity);
+                    this.color = "blue";
                 }
+
                 break;
             case "guard":
                 if (this.stateTimer == 45) {
@@ -39,6 +44,9 @@ class ball {
                 else if (this.stateTimer >= 120) {
                     this.changeState("normal");
                 }
+
+                this.color = kctLIB.getRandomColor();
+
                 break;
             default:
                 this.velocity.add(this.seek(target));

@@ -21,25 +21,6 @@ console.log("loaded wsbLIB");
                 document.querySelector(labelName).innerHTML = document.querySelector(controlName).value;
             }
         },
-
-        drawCircle(ctx, x, y, radius, fillStyle = "black", lineWidth = 0, strokeStyle = "black") {
-            ctx.save();
-            ctx.fillStyle = fillStyle;
-            ctx.beginPath();
-            ctx.arc(x, y, radius, 2 * Math.PI, false);
-            ctx.closePath();
-            ctx.fill();
-            if (lineWidth > 0) {
-                ctx.lineWidth = lineWidth;
-                ctx.strokeStyle = strokeStyle;
-                ctx.stroke();
-            }
-            ctx.restore();
-        },
-
-        drawParticle(ctx, particle) {
-            wsbLIB.drawCircle(ctx, particle.position.x, particle.position.y, particle.radius, particle.color);
-        },
     };
 
     if (window) {
