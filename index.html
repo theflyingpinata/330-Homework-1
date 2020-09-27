@@ -16,12 +16,12 @@
 <body>
     <header>
         <div id="title">
-            We Didn't Have Any Ideas For Our Project, So We Just Made Two Balls
-            Fight
+            <h1>We Didn't Have Any Ideas For Our Project, So We Just Made Two Balls
+                Fight </h1>
         </div>
 
         <div id="authors">
-            By Kipling Tidwell and Will Bertiz
+            <h2> By Kipling Tidwell and Will Bertiz </h2>
         </div>
     </header>
 
@@ -136,4 +136,33 @@
         </div>
     </div>
 
+    <div id="descAndInstr">
+        <div id="description">
+            <h3> Description </h3>
+            While watching anime one day, we decided to model out Rich Media project after an anime fight.
+            Specifically, the way fighting entities circle and dance around each other during battle.
+            We implemented seek and collision functions so the balls could interact with each other, as well as
+            a state machine that changes the behaviors of the balls whenever they collide with each other.
+        </div>
+    
+        <div id="instructions">
+            <h3> Instructions </h3>
+            <ul>
+                <li> Using the size sliders, you can change how large the balls are </li>
+                <li> Click the dropdown to change the global alpha value, which affects the trails the circular objects
+                    leave when they move
+                </li>
+                <li> Change the action weights to change how often the orbs enter a specific state
+                    <ul>
+                        <li> Attack: Ball will seek the other ball </li>
+                        <li> Dash: Ball will move fast in it's current direction </li>
+                        <li> Guard: Ball will slow down </li>
+                    </ul>
+                </li>
+                <li>
+                    Use the Ball Color Picker to change the color of the balls during a specific state
+                </li>
+            </ul>
+        </div>
+    </div>
 </body>
