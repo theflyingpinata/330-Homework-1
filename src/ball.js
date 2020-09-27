@@ -10,9 +10,9 @@ class ball {
         this.state = "normal";
         this.stateTimer = 0;
 
-        this.guardColor = "Yellow";
         this.normalColor = "Red";
         this.dashColor = "Blue";
+        this.guardColor = "Yellow";
     }
 
     update() {
@@ -30,15 +30,16 @@ class ball {
                 this.velocity.add(this.seek(target));
 
                 this.color = this.normalColor;
+                console.log(this.normalColor);
 
                 break;
             case "dash":
-                if (this.stateTimer >= 160) {
+                if (this.stateTimer <= 160) {
                     let seekVector = this.seek(target);
                     seekVector.scale(10);
                     this.velocity.add(seekVector);//= kctLIB.add2Vector(this.seek(target).scale(3), this.velocity);
-                    this.color = this.dashColor;
                 }
+                this.color = this.dashColor;
 
                 break;
             case "guard":

@@ -43,17 +43,51 @@ console.log("loaded");
             }
             ctx.restore();
         },
-        
-        drawBall(ctx, ball){
+
+        drawStar(ctx, x, y, spikes, innerRadius = 5, outerRadius = 10, effectWidth = 5, startingRot = 0, innerFillStyle = "yellow", effectFillStyle = "red") {
+            let rot = (Math.PI / 2 * 3);
+            let tempx = x;
+            let tempy = y;
+            let step = Math.PI / spikes;
+
+            rot += startingRot;
+            ctx.beginPath();
+            ctx.moveTo(x + Math.cos(rot) * outerRadius , y + Math.sin(rot) * outerRadius)
+            // Draw each spike
+            for (i = 0; i < spikes; i++) {
+                tempx = x + Math.cos(rot) * outerRadius;
+                tempy = y + Math.sin(rot) * outerRadius;
+                ctx.lineTo(tempx, tempy)
+                rot += step
+
+                tempx = x + Math.cos(rot) * innerRadius;
+                tempy = y + Math.sin(rot) * innerRadius;
+                ctx.lineTo(tempx, tempy)
+                rot += step
+            }
+            ctx.lineTo(x + Math.cos(rot) * outerRadius , y + Math.sin(rot) * outerRadius);
+            ctx.closePath();
+            ctx.lineWidth = effectWidth;
+            ctx.strokeStyle = effectFillStyle;
+            ctx.stroke();
+            ctx.fillStyle = innerFillStyle;
+            ctx.fill();
+        },
+
+        drawBall(ctx, ball) {
             kctLIB.drawCircle(ctx, ball.position.x, ball.position.y, ball.radius, ball.color);
         },
-        
+
         add2Vector(vector1, vector2) {
             return new vector(vector1.x + vector2.x, vector1.y + vector2.y);
         },
 
         sub2Vector(vector1, vector2) {
             return new vector(vector1.x - vector2.x, vector1.y - vector2.y);
+        },
+
+        getMidPoint(vector1, vector2) {
+            return new vector((vector1.x + vector2.x) / 2, (vector1.y + vector2.y) / 2);
         }
 
     };
