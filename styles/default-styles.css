@@ -6,6 +6,10 @@
 }
 
 #canvasEffects {
+    border: 2px solid black;
+    margin: auto;
+    bottom: 135px;
+    left: 145px;
     position: absolute;
 }
 

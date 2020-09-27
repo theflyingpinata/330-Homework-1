@@ -113,9 +113,10 @@ function loop() {
 
     
     ctxEffects.save();
-    ctxEffects.fillStyle = "white";
+    ctxEffects.fillStyle = "alpha";
     ctxEffects.globalAlpha = 1 / alphaDropdown.value;
     ctxEffects.fillRect(0, 0, canvasWidth, canvasHeight);
+    ctxEffects.clearRect(0, 0, canvasWidth, canvasHeight);
     ctxEffects.restore();
 
     if (ballMid.checkCollision(ball1)) {
