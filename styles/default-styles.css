@@ -1,11 +1,23 @@
 canvas {
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    color: #d8d6d6;
+    background-color: #1e1e1e;
+
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
+
+button {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 2em;
+    margin: 1em;
+    border-radius: 3px;
 }
 
 .flexChild {
@@ -18,11 +30,19 @@ body {
     justify-content: center;
     margin: auto;
     margin-top: 2em;
-    width: 75%;
+    margin-right: 2em;
+    width: 80%;
+
+    background-color: #814594;
+    border-radius: 8px;
 }
 
 .controlsContainerChild {
     flex-grow: 1;
+}
+
+.sliderContainer {
+    margin: 2em;
 }
 
 #canvasContainer {
@@ -33,14 +53,10 @@ body {
 
 #canvas {
     display: block;
-    position: relative;
     margin: auto;
 }
 
-#playButton{
-    size: 3em;
-}
-
-div {
-    border: 1px solid pink;
+#buttonsContainer {
+    display: flex;
+    flex-direction: column;
 }

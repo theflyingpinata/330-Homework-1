@@ -13,6 +13,16 @@
 
 </head>
 
+<header>
+    <div id="title">
+        We Didn't Have Any Ideas For Our Rich Media Development Project, So We Just Made Two Balls Have An Anime Fight
+    </div>
+
+    <div>
+        By Kipling Tidwell and Will Bertiz
+    </div>
+</header>
+
 <body>
     <div id="canvasContainer" class="flexChind">
         <canvas id="canvas"> This is where the canvas should go </canvas>
@@ -20,31 +30,32 @@
 
     <div id="controlsContainer" class="flexChild">
         <div id="weightAndSize" class="controlsContainerChild">
+
             <div id="buttonsContainer">
                 <button id="playButton">Play</button>
                 <button id="pauseButton">Pause</button>
             </div>
-    
+
             <div class="sliderContainer">
                 <div id="size1Label">
                     Ball Size: 25
                 </div>
                 <input type="range" min="1" max="50" value="25" class="slider" id="size1Slider">
-    
+
                 <div id="size2Label">
                     Ball Size: 50
                 </div>
                 <input type="range" min="1" max="50" value="50" class="slider" id="size2Slider">
             </div>
-    
-    
+
+
             <div class="sliderContainer">
                 <div id="alphaLabel">
                     Global Alpha: 10
                 </div>
                 <input type="range" min="1" max="60" value="10" class="slider" id="alphaSlider">
             </div>
-    
+
             <div class="sliderContainer">
                 <p>Action Weights</p>
                 <div id="attackLabel">
@@ -61,7 +72,7 @@
                 <input type="range" min="1" max="100" value="25" class="slider" id="guardSlider">
             </div>
         </div>
-        
+
         <div id="colorSelectors" class="controlsContainerChild">
             <div class="sliderContainer">
                 <p> Select Ball </p>
@@ -69,7 +80,7 @@
                 <label for="ball1"> Black Ball </label><br>
                 <input type="radio" id="ballMidColor" name="ball" value="ballMid">
                 <label for="ballMid"> White Ball </label><br>
-    
+
                 <p> Ball Color Picker </p>
                 <div id="stateColorPicker">
                     <div id="guardColorPicker">
@@ -87,7 +98,7 @@
                         </div>
                         <input type="range" min="0" max="100" value="25" class="slider" id="LlevelGuard">
                     </div>
-    
+
                     <div id="normalColorPicker">
                         <p> Normal </p>
                         <div id="HNormal">
@@ -103,7 +114,7 @@
                         </div>
                         <input type="range" min="0" max="100" value="25" class="slider" id="LlevelNormal">
                     </div>
-    
+
                     <div id="dashColorPicker">
                         <p> Dash </p>
                         <div id="HlevelDash">
