@@ -1,5 +1,16 @@
-canvas {
+#canvasMain {
     border: 2px solid black;
+    margin: auto;
+    position: relative;
+    display: block;
+}
+
+#canvasEffects {
+    border: 2px solid black;
+    margin: auto;
+    bottom: 135px;
+    left: 145px;
+    position: absolute;
 }
 
 body {
@@ -76,6 +87,7 @@ header div {
 }
 
 h1 {
+    font-family: 'Secular One', sans-serif;
     font-size: 1em;
 }
 
