@@ -74,3 +74,23 @@ header {
 header div {
     margin: 20px;
 }
+
+h1 {
+    font-size: 1em;
+}
+
+h2 {
+    font-size: .5em;
+}
+
+#descAndInstr {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+    color: #d8d6d6;
+}
+
+li {
+    margin: .2em;
+}
