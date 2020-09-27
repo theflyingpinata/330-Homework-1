@@ -72,8 +72,8 @@ function init() {
     //alphaDropdown.onchange = wsbLIB.updateLabel("#alphaLabel", "#alphaDropdown");
 
     //ball1SizeSlider.oninput = updateLabel("#sizeLabel", "#sizeSlider");
-    ball1SizeSlider.addEventListener("input", wsbLIB.updateLabel("#size1Label", "#size1Slider"));
-    ball2SizeSlider.addEventListener("input", wsbLIB.updateLabel("#size2Label", "#size2Slider"));
+    ball1SizeSlider.addEventListener("input", function(e) {document.querySelector("#size1Label").innerHTML = "Ball 1 size: " + e.target.value});
+    ball2SizeSlider.addEventListener("input", function(e){document.querySelector("#size1Label").innerHTML = "Ball 2 size: " + e.target.value});
 
 
     // for action weights
