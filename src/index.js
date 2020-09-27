@@ -58,6 +58,9 @@ function init() {
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
     ctx.restore();
 
+    
+    ctxEffects = canvasEffects.getContext('2d');
+
     // Pausing and playing
     document.querySelector("#playButton").onclick = function () {
         if (paused) {
@@ -108,6 +111,12 @@ function loop() {
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
     ctx.restore();
 
+    
+    ctxEffects.save();
+    ctxEffects.fillStyle = "white";
+    ctxEffects.globalAlpha = 1 / alphaDropdown.value;
+    ctxEffects.fillRect(0, 0, canvasWidth, canvasHeight);
+    ctxEffects.restore();
 
     if (ballMid.checkCollision(ball1)) {
         ballMid.velocity.x = -ballMid.velocity.x;
@@ -118,8 +127,9 @@ function loop() {
         getNewAction(ball1);
         getNewAction(ballMid);
 
+        // Clashing effects
         let collisionPoint = kctLIB.getMidPoint(ball1.position, ballMid.position);
-        kctLIB.drawStar(ctx, collisionPoint.x, collisionPoint.y, kctLIB.getRandomInt(4, 8), kctLIB.getRandomInt(12, 24), kctLIB.getRandomInt(24, 36), kctLIB.getRandomInt(5, 10), kctLIB.getRandomInt(0, 100), "red", "yellow");
+        kctLIB.drawStar(ctxEffects, collisionPoint.x, collisionPoint.y, kctLIB.getRandomInt(4, 8), kctLIB.getRandomInt(12, 24), kctLIB.getRandomInt(24, 36), kctLIB.getRandomInt(5, 10), kctLIB.getRandomInt(0, 100), "red", "yellow");
     }
     else {
 
