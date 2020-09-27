@@ -1,4 +1,4 @@
-console.log("loaded");
+console.log("loaded kctLIB");
 
 (function () {
 
