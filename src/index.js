@@ -80,13 +80,12 @@ function init() {
     initializeWeights();
 
 
-    ball1SizeSlider.addEventListener("input", wsbLIB.updateBallSize(ball1, ballMid));
-    ball2SizeSlider.addEventListener("input", wsbLIB.updateBallSize(ballMid, ball1));
 
     colorSliderInit();
 
 
     setupBalls();
+
     kctLIB.drawBall(ctx, ballMid);
     kctLIB.drawBall(ctx, ball1);
 
@@ -145,12 +144,15 @@ function loop() {
 
 
 function setupBalls() {
-    ball1 = new ball(kctLIB.getRandomInt(0, canvasWidth / 2), kctLIB.getRandomInt(0, canvasHeight), 25);
-    ballMid = new ball(kctLIB.getRandomInt(canvasWidth / 2, canvasWidth), kctLIB.getRandomInt(0, canvasHeight), 50);
+    ball1 = new ball(kctLIB.getRandomInt(0, canvasWidth / 2), kctLIB.getRandomInt(0, canvasHeight), parseInt(ball1SizeSlider.value, 10));
+    ballMid = new ball(kctLIB.getRandomInt(canvasWidth / 2, canvasWidth), kctLIB.getRandomInt(0, canvasHeight), parseInt(ball2SizeSlider.value, 10));
     
     updateNormalColor();
     updateDashColor();
     updateGuardColor();
+    
+    ball1SizeSlider.addEventListener("input", wsbLIB.updateBallSize(ball1, ballMid));
+    ball2SizeSlider.addEventListener("input", wsbLIB.updateBallSize(ballMid, ball1));
 }
 
 function getNewAction(ball) {
