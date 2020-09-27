@@ -13,125 +13,123 @@
 
 </head>
 
-<header>
-    <div id="title">
-        We Didn't Have Any Ideas For Our Rich Media Development Project, So We Just Made Two Balls Have An Anime Fight
-    </div>
-
-    <div>
-        By Kipling Tidwell and Will Bertiz
-    </div>
-</header>
-
 <body>
-    <div id="canvasContainer" class="flexChind">
-        <canvas id="canvas"> This is where the canvas should go </canvas>
-    </div>
-
-    <div id="controlsContainer" class="flexChild">
-        <div id="weightAndSize" class="controlsContainerChild">
-
-            <div id="buttonsContainer">
-                <button id="playButton">Play</button>
-                <button id="pauseButton">Pause</button>
-            </div>
-
-            <div class="sliderContainer">
-                <div id="size1Label">
-                    Ball Size: 25
-                </div>
-                <input type="range" min="1" max="50" value="25" class="slider" id="size1Slider">
-
-                <div id="size2Label">
-                    Ball Size: 50
-                </div>
-                <input type="range" min="1" max="50" value="50" class="slider" id="size2Slider">
-            </div>
-
-
-            <div class="sliderContainer">
-                <div id="alphaLabel">
-                    Global Alpha: 10
-                </div>
-                <input type="range" min="1" max="60" value="10" class="slider" id="alphaSlider">
-            </div>
-
-            <div class="sliderContainer">
-                <p>Action Weights</p>
-                <div id="attackLabel">
-                    Attack (Red):
-                </div>
-                <input type="range" min="1" max="100" value="50" class="slider" id="attackSlider">
-                <div id="dashLabel">
-                    Dash (Blue):
-                </div>
-                <input type="range" min="1" max="100" value="25" class="slider" id="dashSlider">
-                <div id="guardLabel">
-                    Guard (Random Color):
-                </div>
-                <input type="range" min="1" max="100" value="25" class="slider" id="guardSlider">
-            </div>
+    <header>
+        <div id="title">
+            We Didn't Have Any Ideas For Our Rich Media Development Project, So We Just Made Two Balls
+            Fight
         </div>
 
-        <div id="colorSelectors" class="controlsContainerChild">
-            <div class="sliderContainer">
-                <p> Select Ball </p>
-                <input type="radio" id="ball1Color" name="ball" value="ball1">
-                <label for="ball1"> Black Ball </label><br>
-                <input type="radio" id="ballMidColor" name="ball" value="ballMid">
-                <label for="ballMid"> White Ball </label><br>
+        <div id="authors">
+            By Kipling Tidwell and Will Bertiz
+        </div>
+    </header>
 
-                <p> Ball Color Picker </p>
-                <div id="stateColorPicker">
-                    <div id="guardColorPicker">
-                        <p> Guard </p>
-                        <div id="HGuard">
-                            H:
-                        </div>
-                        <input type="range" min="0" max="360" value="180" class="slider" id="HlevelGuard">
-                        <div id="SGuard">
-                            S:
-                        </div>
-                        <input type="range" min="0" max="100" value="25" class="slider" id="SlevelGuard">
-                        <div id="LGuard">
-                            L:
-                        </div>
-                        <input type="range" min="0" max="100" value="25" class="slider" id="LlevelGuard">
+    <div id="application">
+        <div id="canvasContainer" class="flexChind">
+            <canvas id="canvas"> This is where the canvas should go </canvas>
+        </div>
+
+        <div id="controlsContainer" class="flexChild">
+            <div id="weightAndSize" class="controlsContainerChild">
+
+                <div id="buttonsContainer">
+                    <button id="playButton">Play</button>
+                    <button id="pauseButton">Pause</button>
+                </div>
+
+                <div class="sliderContainer">
+                    <div id="size1Label">
+                        Ball Size: 25
                     </div>
+                    <input type="range" min="1" max="50" value="25" class="slider" id="size1Slider">
 
-                    <div id="normalColorPicker">
-                        <p> Normal </p>
-                        <div id="HNormal">
-                            H:
-                        </div>
-                        <input type="range" min="0" max="360" value="180" class="slider" id="HlevelNormal">
-                        <div id="SNormal">
-                            S:
-                        </div>
-                        <input type="range" min="0" max="100" value="25" class="slider" id="SlevelNormal">
-                        <div id="LNormal">
-                            L:
-                        </div>
-                        <input type="range" min="0" max="100" value="25" class="slider" id="LlevelNormal">
+                    <div id="size2Label">
+                        Ball Size: 50
                     </div>
+                    <input type="range" min="1" max="50" value="50" class="slider" id="size2Slider">
+                </div>
 
-                    <div id="dashColorPicker">
-                        <p> Dash </p>
-                        <div id="HlevelDash">
-                            H:
+
+                <div class="sliderContainer">
+                    <div id="alphaLabel">
+                        Global Alpha: 10
+                    </div>
+                    <input type="range" min="1" max="60" value="10" class="slider" id="alphaSlider">
+                </div>
+
+                <div class="sliderContainer">
+                    <p>Action Weights</p>
+                    <div id="attackLabel">
+                        Attack:
+                    </div>
+                    <input type="range" min="1" max="100" value="50" class="slider" id="attackSlider">
+                    <div id="dashLabel">
+                        Dash:
+                    </div>
+                    <input type="range" min="1" max="100" value="25" class="slider" id="dashSlider">
+                    <div id="guardLabel">
+                        Guard:
+                    </div>
+                    <input type="range" min="1" max="100" value="25" class="slider" id="guardSlider">
+                </div>
+            </div>
+
+            <div id="colorSelectors" class="controlsContainerChild">
+                <div class="sliderContainer">
+                    <p> Ball Color Picker </p>
+                    <div id="stateColorPicker">
+                        <div id="guardColorPicker">
+                            <p> Guard </p>
+                            <div id="HGuard">
+                                H:
+                            </div>
+                            <input type="range" min="0" max="360" value="180" class="slider" id="HlevelGuard">
+                            <div id="SGuard">
+                                S:
+                            </div>
+                            <input type="range" min="0" max="100" value="25" class="slider" id="SlevelGuard">
+                            <div id="LGuard">
+                                L:
+                            </div>
+                            <input type="range" min="0" max="100" value="25" class="slider" id="LlevelGuard">
                         </div>
-                        <input type="range" min="0" max="360" value="180" class="slider" id="attackSlider">
-                        <div id="SlevelDash">
-                            S:
+
+                        <div id="normalColorPicker">
+                            <p> Normal </p>
+                            <div id="HNormal">
+                                H:
+                            </div>
+                            <input type="range" min="0" max="360" value="180" class="slider" id="HlevelNormal">
+                            <div id="SNormal">
+                                S:
+                            </div>
+                            <input type="range" min="0" max="100" value="25" class="slider" id="SlevelNormal">
+                            <div id="LNormal">
+                                L:
+                            </div>
+                            <input type="range" min="0" max="100" value="25" class="slider" id="LlevelNormal">
                         </div>
-                        <input type="range" min="0" max="100" value="25" class="slider" id="dashSlider">
-                        <div id="LlevelDash">
-                            L:
+
+                        <div id="dashColorPicker">
+                            <p> Dash </p>
+                            <div id="HlevelDash">
+                                H:
+                            </div>
+                            <input type="range" min="0" max="360" value="180" class="slider" id="attackSlider">
+                            <div id="SlevelDash">
+                                S:
+                            </div>
+                            <input type="range" min="0" max="100" value="25" class="slider" id="dashSlider">
+                            <div id="LlevelDash">
+                                L:
+                            </div>
+                            <input type="range" min="0" max="100" value="25" class="slider" id="guardSlider">
                         </div>
-                        <input type="range" min="0" max="100" value="25" class="slider" id="guardSlider">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </body>

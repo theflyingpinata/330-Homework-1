@@ -3,14 +3,19 @@ canvas {
 }
 
 body {
+    color: #d8d6d6;
+    background-color: #1e1e1e;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
+
+#application {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    color: #d8d6d6;
-    background-color: #1e1e1e;
-
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 20px;
+    position: relative;
+    margin: auto;
+    right: 3%;
 }
 
 button {
@@ -59,4 +64,15 @@ button {
 #buttonsContainer {
     display: flex;
     flex-direction: column;
+}
+
+header {
+    background-color: #141414;
+    margin: auto;
+    width: 85%;
+}
+
+header div {
+    margin: 1em;
+    top: 1em;
 }

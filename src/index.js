@@ -175,21 +175,21 @@ function initializeWeights() {
     // attack
     attackSlider = document.querySelector("#attackSlider");
     attackWeight = parseInt(attackSlider.value, 10);
-    document.querySelector("#attackLabel").innerHTML = `Attack (Red): ${attackWeight}`;
+    document.querySelector("#attackLabel").innerHTML = `Attack: ${attackWeight}`;
     attackSlider.addEventListener("input", function (e) { document.querySelector("#attackLabel").innerHTML = `Attack: ${e.target.value}`; });
     attackSlider.addEventListener("input", function (e) { attackWeight = parseInt(attackSlider.value, 10); });
 
     // dash
     dashSlider = document.querySelector("#dashSlider");
     dashWeight = parseInt(dashSlider.value, 10);
-    document.querySelector("#dashLabel").innerHTML = `Dash (Blue): ${dashWeight}`;
+    document.querySelector("#dashLabel").innerHTML = `Dash: ${dashWeight}`;
     dashSlider.addEventListener("input", function (e) { document.querySelector("#dashLabel").innerHTML = `Dash: ${e.target.value}`; });
     dashSlider.addEventListener("input", function (e) { dashWeight = parseInt(dashSlider.value, 10); });
 
     // guard
     guardSlider = document.querySelector("#guardSlider");
     guardWeight = parseInt(guardSlider.value, 10);
-    document.querySelector("#guardLabel").innerHTML = `Guard (Random): ${guardWeight}`;
+    document.querySelector("#guardLabel").innerHTML = `Guard: ${guardWeight}`;
     guardSlider.addEventListener("input", function (e) { document.querySelector("#guardLabel").innerHTML = `Guard: ${e.target.value}`; });
     guardSlider.addEventListener("input", function (e) { guardWeight = parseInt(guardSlider.value, 10); });
 
