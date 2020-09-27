@@ -15,6 +15,6 @@ We made sure to keep our naming standard consistent, and just in general have go
 
 Where we went above and beyond is by doing something not all done in class, and I do think what we have made is pretty interesting. I know I've just watched it for about 15 minutes straight.
 
-If we had more energy we would want to add more options for the clash effect and give both fighters individual color options.
+If we had more energy we would want to add more options for the clash effect and give both fighters individual color options. Also, we could figure out a perfect solution of the clash effect disappearing.
 
 I think we have a 100% project. I don't think we've missed any of the requirements, and what we've created is a unique experience.
