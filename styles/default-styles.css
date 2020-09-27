@@ -94,3 +94,8 @@ h2 {
 li {
     margin: .2em;
 }
+
+#alphaDropdown {
+    margin: .2em;
+    font-size: 1.2em;
+}
