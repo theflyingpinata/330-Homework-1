@@ -15,11 +15,37 @@ console.log("loaded wsbLIB");
                 }
             }
         },
+
+        updateBallColor(ball, state, Hval, Sval, Lval) {
+            return function (e) {
+                switch (state) {
+                    case "normal":
+                        ball.normalColor = `hsl(${Hval}, ${Sval}%, ${Lval}%)`;
+                    break;
+                    case "guard":
+                        ball.guardColor = `hsl(${Hval}, ${Sval}%, ${Lval}%)`;
+                    break;
+                    case "dash":
+                        ball.dashColor = `hsl(${Hval}, ${Sval}%, ${Lval}%)`;
+                    break;
+                }
+            }
+        },
         
         updateLabel(labelName, controlName) {
             return function () {
                 document.querySelector(labelName).innerHTML = document.querySelector(controlName).value;
             }
+        },
+
+        canvasClicked(e) {
+            let rect = e.target.getBoundingClientRect();
+            let mouseX = e.clientX - rect.x;
+            let mouseY = e.clientY - rect.y;
+
+            console.log(`${mouseX}, ${mouseY}`);
+
+            return {mouseX, mouseY};
         },
     };
 

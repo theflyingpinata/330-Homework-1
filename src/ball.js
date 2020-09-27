@@ -9,6 +9,10 @@ class ball {
         this.velocity = new vector(0, 0);
         this.state = "normal";
         this.stateTimer = 0;
+
+        this.guardColor = "Yellow";
+        this.normalColor = "Red";
+        this.dashColor = "Blue";
     }
 
     update() {
@@ -25,7 +29,7 @@ class ball {
             case "normal":
                 this.velocity.add(this.seek(target));
 
-                this.color = "red";
+                this.color = this.normalColor;
 
                 break;
             case "dash":
@@ -33,7 +37,7 @@ class ball {
                     let seekVector = this.seek(target);
                     seekVector.scale(10);
                     this.velocity.add(seekVector);//= kctLIB.add2Vector(this.seek(target).scale(3), this.velocity);
-                    this.color = "blue";
+                    this.color = this.dashColor;
                 }
 
                 break;
@@ -45,7 +49,7 @@ class ball {
                     this.changeState("normal");
                 }
 
-                this.color = kctLIB.getRandomColor();
+                this.color = this.guardColor;
 
                 break;
             default:
@@ -64,6 +68,15 @@ class ball {
 
     seek(target) {
         let seekVector = kctLIB.sub2Vector(target.position, this.position);//new vector(target.position.x - this.position.x, target.position.y - this.position.y);
+        seekVector.normalize();
+        //seekVector.print();
+        seekVector.scale(this.acceleration);
+        return seekVector;
+        //this.velocity = kctLIB.add2Vector(seekVector, this.velocity);
+    }
+
+    seekPosition(x, y) {
+        let seekVector = kctLIB.sub2Vector(new vector(x, y), this.position);//new vector(target.position.x - this.position.x, target.position.y - this.position.y);
         seekVector.normalize();
         //seekVector.print();
         seekVector.scale(this.acceleration);
@@ -104,6 +117,12 @@ class ball {
             return true;
         }
         return false;
+    }
+
+    changeColors(newNormal, newDash, newGuard) {
+        this.guardColor = newGuard;
+        this.normalColor = newNormal;
+        this.dashColor = newDash;
     }
 }
 

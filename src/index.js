@@ -13,6 +13,7 @@ let paused;
 
 let ball1SizeSlider;
 let ball2SizeSlider;
+let currentBall;
 
 let alphaSlider;
 let alphaLabel;
@@ -22,6 +23,13 @@ let attackLabel, dashLabel, guardLabel;
 let attackSlider, dashSlider, guardSlider;
 let attackWeight, dashWeight, guardWeight;
 
+let ball1Color;
+let ballMidColor;
+let HlevelGuard, SlevelGuard, LlevelGuard;
+let HlevelNormal, SlevelNormal, LlevelNormal;
+let HlevelDash, SlevelDash, LlevelDash;
+
+let isMouseDown = false;
 
 function init() {
     canvas = document.querySelector('canvas');
@@ -31,12 +39,17 @@ function init() {
     ball2SizeSlider = document.querySelector("#size2Slider");
     velocityLabel = document.querySelector("#velocityLabel");
 
+    ball1Color = document.querySelector("#ball1Color");
+    ballMidColor = document.querySelector("#ballMidColor");
+
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
 
+    canvas.addEventListener("mousedown", toggleMouseDown);
+
     ctx = canvas.getContext('2d');
     ctx.save();
-    ctx.fillStyle  = "#1e1e1e";
+    ctx.fillStyle = "#1e1e1e";
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
     ctx.restore();
 
@@ -62,11 +75,16 @@ function init() {
     // for action weights
     initializeWeights();
 
-    ball1 = new ball(kctLIB.getRandomInt(0, canvasWidth / 2), kctLIB.getRandomInt(0, canvasHeight), 25, "red");
-    ballMid = new ball(kctLIB.getRandomInt(canvasWidth / 2, canvasWidth), kctLIB.getRandomInt(0, canvasHeight), 50, "black");
+    ball1 = new ball(kctLIB.getRandomInt(0, canvasWidth / 2), kctLIB.getRandomInt(0, canvasHeight), 25);
+    ballMid = new ball(kctLIB.getRandomInt(canvasWidth / 2, canvasWidth), kctLIB.getRandomInt(0, canvasHeight), 50);
+
+    ball1Color.addEventListener("click", changeCurrentBall(ball1));
+    ballMidColor.addEventListener("click", changeCurrentBall(ballMid));
 
     ball1SizeSlider.addEventListener("input", wsbLIB.updateBallSize(ball1, ballMid));
     ball2SizeSlider.addEventListener("input", wsbLIB.updateBallSize(ballMid, ball1));
+
+    colorSliderInit();
 
     kctLIB.drawBall(ctx, ballMid);
     kctLIB.drawBall(ctx, ball1);
@@ -101,9 +119,10 @@ function loop() {
     }
     else {
 
-        ball1.doAction(ballMid);
-        ballMid.doAction(ball1);
-
+        if (!isMouseDown) {
+            ball1.doAction(ballMid);
+            ballMid.doAction(ball1);
+        }
     }
 
     ball1.update(ballMid);
@@ -178,6 +197,43 @@ function initializeWeights() {
 
 }
 
+function toggleMouseDown(e) {
+    isMouseDown = !isMouseDown;
+}
+
 function cls(ctx) {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+}
+
+function changeCurrentBall(ball) {
+    return function () {
+        currentBall = ball;
+        //console.log("currentBall = " + ball);
+    }
+}
+
+function colorSliderInit() {
+    HlevelGuard = document.querySelector("#HlevelGuard");
+    SlevelGuard = document.querySelector("#SlevelGuard");
+    LlevelGuard = document.querySelector("#LlevelGuard");
+
+    HlevelNormal = document.querySelector("#HlevelNormal");
+    SlevelNormal = document.querySelector("#SlevelNormal");
+    LlevelNormal = document.querySelector("#LlevelNormal");
+
+    HlevelDash = document.querySelector("#HlevelDash");
+    SlevelDash = document.querySelector("#SlevelDash");
+    LlevelDash = document.querySelector("#LlevelDash");
+
+    HlevelNormal.addEventListener(
+        "input",
+        wsbLIB.updateBallColor(ball1, "normal", HlevelNormal.value, SlevelNormal.value, LlevelNormal.value));
+
+    SlevelNormal.addEventListener(
+        "input",
+        wsbLIB.updateBallColor(ball1, "normal", HlevelNormal.value, SlevelNormal.value, LlevelNormal.value));
+
+    LlevelNormal.addEventListener(
+        "input",
+        wsbLIB.updateBallColor(ball1, "normal", HlevelNormal.value, SlevelNormal.value, LlevelNormal.value));
 }

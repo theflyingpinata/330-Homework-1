@@ -11,3 +11,36 @@ body {
 .flexChild {
     margin: 5em;
 }
+
+#controlsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: auto;
+    margin-top: 2em;
+    width: 75%;
+}
+
+.controlsContainerChild {
+    flex-grow: 1;
+}
+
+#canvasContainer {
+    margin: auto;
+    margin-top: 2em;
+    width: 75%;
+}
+
+#canvas {
+    display: block;
+    position: relative;
+    margin: auto;
+}
+
+#playButton{
+    size: 3em;
+}
+
+div {
+    border: 1px solid pink;
+}
