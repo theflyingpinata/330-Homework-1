@@ -1,0 +1,20 @@
+Overall Theme/Impact
+What we wanted to make was basically a anime fight simulator, which can be seen as a chaotic system. To do this we added 3 actions the "fighters" can take.
+These 3 actions are normal, dash, and guard. Normal will seek the other ball, dash will seek the other ball 5 times as fast, and guard will move for sometime and then stop, and then after some time will seek the other ball.
+We added these actions to give the fighters some more interesting movement besides just always bouncing off each other in a boring way.
+We also added effects when the fighters clash to add some spice.
+
+User Experience
+We added controls for the colors the ball can take, and how long their paths stay on the canvas. We also allowed the user to change the weights of actions, so if they wanted to have the fighters guard a ton, they could.
+
+Media
+Pretty sure we added all the things we needed to, but most of them came naturally just trying to improve the app.
+
+Code
+We made sure to keep our naming standard consistent, and just in general have good code.
+
+Where we went above and beyond is by doing something not all done in class, and I do think what we have made is pretty interesting. I know I've just watched it for about 15 minutes straight.
+
+If we had more energy we would want to add more options for the clash effect and give both fighters individual color options.
+
+I think we have a 100% project. I don't think we've missed any of the requirements, and what we've created is a unique experience.
