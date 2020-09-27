@@ -45,6 +45,7 @@ console.log("loaded");
         },
 
         drawStar(ctx, x, y, spikes, innerRadius = 5, outerRadius = 10, effectWidth = 5, startingRot = 0, innerFillStyle = "yellow", effectFillStyle = "red") {
+            ctx.save();
             let rot = (Math.PI / 2 * 3);
             let tempx = x;
             let tempy = y;
@@ -72,6 +73,7 @@ console.log("loaded");
             ctx.stroke();
             ctx.fillStyle = innerFillStyle;
             ctx.fill();
+            ctx.restore();
         },
 
         drawBall(ctx, ball) {

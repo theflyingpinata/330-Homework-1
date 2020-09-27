@@ -64,6 +64,10 @@ function init() {
     document.querySelector("#pauseButton").onclick = function () {
         paused = true;
     };
+    
+    document.querySelector("#resetButton").onclick = function () {
+        setupBalls();
+    };
 
     alphaSlider.oninput = wsbLIB.updateLabel("#alphaLabel", "#alphaSlider");
 
@@ -75,15 +79,14 @@ function init() {
     // for action weights
     initializeWeights();
 
-    ball1 = new ball(kctLIB.getRandomInt(0, canvasWidth / 2), kctLIB.getRandomInt(0, canvasHeight), 25);
-    ballMid = new ball(kctLIB.getRandomInt(canvasWidth / 2, canvasWidth), kctLIB.getRandomInt(0, canvasHeight), 50);
-
 
     ball1SizeSlider.addEventListener("input", wsbLIB.updateBallSize(ball1, ballMid));
     ball2SizeSlider.addEventListener("input", wsbLIB.updateBallSize(ballMid, ball1));
 
     colorSliderInit();
 
+
+    setupBalls();
     kctLIB.drawBall(ctx, ballMid);
     kctLIB.drawBall(ctx, ball1);
 
@@ -138,6 +141,16 @@ function loop() {
 
     //velocityLabel.innerHTML = `ball1: ${ball1.velocity.x.toFixed(2)},${ball1.velocity.y.toFixed(2)}\nballMid: ${ballMid.velocity.x.toFixed(2)},${ballMid.velocity.y.toFixed(2)}\n`;
 
+}
+
+
+function setupBalls() {
+    ball1 = new ball(kctLIB.getRandomInt(0, canvasWidth / 2), kctLIB.getRandomInt(0, canvasHeight), 25);
+    ballMid = new ball(kctLIB.getRandomInt(canvasWidth / 2, canvasWidth), kctLIB.getRandomInt(0, canvasHeight), 50);
+    
+    updateNormalColor();
+    updateDashColor();
+    updateGuardColor();
 }
 
 function getNewAction(ball) {
@@ -217,27 +230,6 @@ function colorSliderInit() {
     SlevelDash = document.querySelector("#SlevelDash");
     LlevelDash = document.querySelector("#LlevelDash");
 
-    function updateNormalColor() {
-        let color = `hsl(${parseInt(HlevelNormal.value)}, ${parseInt(SlevelNormal.value)}%, ${parseInt(LlevelNormal.value)}%)`;
-        wsbLIB.updateBallColor(ball1, "normal", color);
-        wsbLIB.updateBallColor(ballMid, "normal", color);
-    };
-    function updateDashColor() {
-        let color = `hsl(${parseInt(HlevelDash.value)}, ${parseInt(SlevelDash.value)}%, ${parseInt(LlevelDash.value)}%)`;
-        wsbLIB.updateBallColor(ball1, "dash", color);
-        wsbLIB.updateBallColor(ballMid, "dash", color);
-    };
-    function updateGuardColor() {
-        let color = `hsl(${parseInt(HlevelGuard.value)}, ${parseInt(SlevelGuard.value)}%, ${parseInt(LlevelGuard.value)}%)`;
-        wsbLIB.updateBallColor(ball1, "guard", color);
-        wsbLIB.updateBallColor(ballMid, "guard", color);
-    };
-
-    updateNormalColor();
-    updateDashColor();
-    updateGuardColor();
-
-
     HlevelNormal.addEventListener("input", updateNormalColor);
     SlevelNormal.addEventListener("input", updateNormalColor);
     LlevelNormal.addEventListener("input", updateNormalColor);
@@ -249,4 +241,21 @@ function colorSliderInit() {
     HlevelGuard.addEventListener("input", updateGuardColor);
     SlevelGuard.addEventListener("input", updateGuardColor);
     LlevelGuard.addEventListener("input", updateGuardColor);
+}
+
+// Helper functions for changing color of balls
+function updateNormalColor() {
+    let color = `hsl(${parseInt(HlevelNormal.value)}, ${parseInt(SlevelNormal.value)}%, ${parseInt(LlevelNormal.value)}%)`;
+    wsbLIB.updateBallColor(ball1, "normal", color);
+    wsbLIB.updateBallColor(ballMid, "normal", color);
+}
+function updateDashColor() {
+    let color = `hsl(${parseInt(HlevelDash.value)}, ${parseInt(SlevelDash.value)}%, ${parseInt(LlevelDash.value)}%)`;
+    wsbLIB.updateBallColor(ball1, "dash", color);
+    wsbLIB.updateBallColor(ballMid, "dash", color);
+}
+function updateGuardColor() {
+    let color = `hsl(${parseInt(HlevelGuard.value)}, ${parseInt(SlevelGuard.value)}%, ${parseInt(LlevelGuard.value)}%)`;
+    wsbLIB.updateBallColor(ball1, "guard", color);
+    wsbLIB.updateBallColor(ballMid, "guard", color);
 }
