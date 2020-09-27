@@ -3,6 +3,7 @@ window.onload = init;
 
 let canvas;
 let ctx;
+let canvasEffects, ctxEffects;
 
 const canvasWidth = 600, canvasHeight = 600;
 
@@ -32,7 +33,8 @@ let HlevelDash, SlevelDash, LlevelDash;
 let isMouseDown = false;
 
 function init() {
-    canvas = document.querySelector('canvas');
+    canvas = document.querySelector('#canvasMain');
+    canvasEffects = document.querySelector('#canvasEffects');
     alphaDropdown = document.querySelector("#alphaDropdown");
     alphaLabel = document.querySelector("#alphaLabel");
     ball1SizeSlider = document.querySelector("#size1Slider");
@@ -44,6 +46,9 @@ function init() {
 
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
+    canvasEffects.width = canvasWidth;
+    canvasEffects.height = canvasHeight;
+    
 
     canvas.addEventListener("mousedown", toggleMouseDown);
 
@@ -112,6 +117,9 @@ function loop() {
 
         getNewAction(ball1);
         getNewAction(ballMid);
+
+        let collisionPoint = kctLIB.getMidPoint(ball1.position, ballMid.position);
+        kctLIB.drawStar(ctx, collisionPoint.x, collisionPoint.y, kctLIB.getRandomInt(4, 8), kctLIB.getRandomInt(12, 24), kctLIB.getRandomInt(24, 36), kctLIB.getRandomInt(5, 10), kctLIB.getRandomInt(0, 100), "red", "yellow");
     }
     else {
 
