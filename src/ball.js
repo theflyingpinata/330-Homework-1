@@ -30,7 +30,6 @@ class ball {
                 this.velocity.add(this.seek(target));
 
                 this.color = this.normalColor;
-                console.log(this.normalColor);
 
                 break;
             case "dash":

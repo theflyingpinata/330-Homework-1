@@ -15,7 +15,7 @@ let ball1SizeSlider;
 let ball2SizeSlider;
 let currentBall;
 
-let alphaSlider;
+let alphaDropdown;
 let alphaLabel;
 
 let velocityLabel;
@@ -33,7 +33,7 @@ let isMouseDown = false;
 
 function init() {
     canvas = document.querySelector('canvas');
-    alphaSlider = document.querySelector("#alphaSlider");
+    alphaDropdown = document.querySelector("#alphaDropdown");
     alphaLabel = document.querySelector("#alphaLabel");
     ball1SizeSlider = document.querySelector("#size1Slider");
     ball2SizeSlider = document.querySelector("#size2Slider");
@@ -69,7 +69,7 @@ function init() {
         setupBalls();
     };
 
-    alphaSlider.oninput = wsbLIB.updateLabel("#alphaLabel", "#alphaSlider");
+    //alphaDropdown.onchange = wsbLIB.updateLabel("#alphaLabel", "#alphaDropdown");
 
     //ball1SizeSlider.oninput = updateLabel("#sizeLabel", "#sizeSlider");
     ball1SizeSlider.addEventListener("input", wsbLIB.updateLabel("#size1Label", "#size1Slider"));
@@ -79,10 +79,7 @@ function init() {
     // for action weights
     initializeWeights();
 
-
-
     colorSliderInit();
-
 
     setupBalls();
 
@@ -102,10 +99,9 @@ function loop() {
 
     ctx.save();
     ctx.fillStyle = "white";
-    ctx.globalAlpha = 1 / alphaSlider.value;
+    ctx.globalAlpha = 1 / alphaDropdown.value;
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
     ctx.restore();
-    //cls(ctx);
 
 
     if (ballMid.checkCollision(ball1)) {
@@ -130,15 +126,12 @@ function loop() {
 
     ball1.checkEdges(canvasWidth, canvasHeight);
     ballMid.checkEdges(canvasWidth, canvasHeight);
-    //console.log(`Velocity: ${ball1.velocity.x}, ${ball1.velocity.y}`)
 
     kctLIB.drawBall(ctx, ballMid);
     kctLIB.drawCircle(ctx, ballMid.position.x, ballMid.position.y, 2, "white");
 
     kctLIB.drawBall(ctx, ball1);
     kctLIB.drawCircle(ctx, ball1.position.x, ball1.position.y, 2, "black");
-
-    //velocityLabel.innerHTML = `ball1: ${ball1.velocity.x.toFixed(2)},${ball1.velocity.y.toFixed(2)}\nballMid: ${ballMid.velocity.x.toFixed(2)},${ballMid.velocity.y.toFixed(2)}\n`;
 
 }
 
@@ -150,34 +143,27 @@ function setupBalls() {
     updateNormalColor();
     updateDashColor();
     updateGuardColor();
-    
+
     ball1SizeSlider.addEventListener("input", wsbLIB.updateBallSize(ball1, ballMid));
     ball2SizeSlider.addEventListener("input", wsbLIB.updateBallSize(ballMid, ball1));
 }
 
 function getNewAction(ball) {
     let randomNum = kctLIB.getRandomInt(0, attackWeight + dashWeight + guardWeight);
-    //console.log(randomNum);
     if (randomNum < attackWeight) {
-        //console.log("normal");
         ball.changeState("normal");
         return;
     }
     randomNum -= attackWeight;
     if (randomNum < dashWeight) {
-        //console.log("dash");
         ball.changeState("dash");
         return;
     }
     randomNum -= dashWeight;
     if (randomNum < guardWeight) {
-        //console.log("guard");
         ball.changeState("guard");
         return;
     }
-
-    //default
-    //ball.changeState("normal");
 }
 
 function updateLabel(labelName, controlName) {
