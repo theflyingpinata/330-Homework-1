@@ -4,7 +4,7 @@ window.onload = init;
 let canvas;
 let ctx;
 
-const canvasWidth = 600, canvasHeight = 400;
+const canvasWidth = 600, canvasHeight = 600;
 
 let ball1;
 let ballMid;
