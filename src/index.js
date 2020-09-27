@@ -113,10 +113,10 @@ function loop() {
 
     
     ctxEffects.save();
-    ctxEffects.fillStyle = "alpha";
+    ctxEffects.fillStyle = "white";
+    ctxEffects.globalCompositeOperation = "source-atop";
     ctxEffects.globalAlpha = 1 / alphaDropdown.value;
     ctxEffects.fillRect(0, 0, canvasWidth, canvasHeight);
-    ctxEffects.clearRect(0, 0, canvasWidth, canvasHeight);
     ctxEffects.restore();
 
     if (ballMid.checkCollision(ball1)) {
@@ -129,8 +129,12 @@ function loop() {
         getNewAction(ballMid);
 
         // Clashing effects
+        ctxEffects.save();
+        ctxEffects.clearRect(0, 0, canvasWidth, canvasHeight);
         let collisionPoint = kctLIB.getMidPoint(ball1.position, ballMid.position);
         kctLIB.drawStar(ctxEffects, collisionPoint.x, collisionPoint.y, kctLIB.getRandomInt(4, 8), kctLIB.getRandomInt(12, 24), kctLIB.getRandomInt(24, 36), kctLIB.getRandomInt(5, 10), kctLIB.getRandomInt(0, 100), "red", "yellow");
+    
+        ctxEffects.restore();
     }
     else {
 
