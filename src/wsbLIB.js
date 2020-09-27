@@ -7,31 +7,28 @@ console.log("loaded wsbLIB");
         updateBallSize(ball, otherBall) {
             return function (e) {
                 ball.radius = parseInt(e.target.value, 10);
-        
-                if (ball.checkCollision(otherBall))
-                {
+
+                if (ball.checkCollision(otherBall)) {
                     ball.position.x += ball.radius;
                     ball.position.y += ball.radius;
                 }
             }
         },
 
-        updateBallColor(ball, state, Hval, Sval, Lval) {
-            return function (e) {
-                switch (state) {
-                    case "normal":
-                        ball.normalColor = `hsl(${Hval}, ${Sval}%, ${Lval}%)`;
+        updateBallColor(ball, state, color) {
+            switch (state) {
+                case "normal":
+                    ball.normalColor = color;
                     break;
-                    case "guard":
-                        ball.guardColor = `hsl(${Hval}, ${Sval}%, ${Lval}%)`;
+                case "guard":
+                    ball.guardColor = color;
                     break;
-                    case "dash":
-                        ball.dashColor = `hsl(${Hval}, ${Sval}%, ${Lval}%)`;
+                case "dash":
+                    ball.dashColor = color;
                     break;
-                }
             }
         },
-        
+
         updateLabel(labelName, controlName) {
             return function () {
                 document.querySelector(labelName).innerHTML = document.querySelector(controlName).value;
@@ -45,7 +42,7 @@ console.log("loaded wsbLIB");
 
             console.log(`${mouseX}, ${mouseY}`);
 
-            return {mouseX, mouseY};
+            return { mouseX, mouseY };
         },
     };
 
